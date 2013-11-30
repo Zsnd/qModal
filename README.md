@@ -1,12 +1,35 @@
-﻿# 说明
+# 说明
 
 jquery.qmodal.js 是一个jquery插件。扩展了[Bootstrap](https://github.com/twitter/bootstrap)原生modal插件，增强了ajax获取modal内容的部分。
 
 []() 可以看到更多说明和例子。
 
+## 阻止 `show` 冒泡
+很多bootstrap系列的插件提供了 `show` 事件。`show` 事件会冒泡执行。
+这会造成问题，例如：当modal中存在一个tab插件时，切换tab会触发 `show` 事件，
+之后会冒泡并执行modal的 `show` 事件。往往会发生意料之外的情况。本插件阻止了 `show` 事件的冒泡。具体代码类似如下：
+
+    <div id="test-div">
+        <button>btn</button>
+    </div>
+    
+    <script>
+        $(function () {
+            $("#test-div").on("click", "button", function (e) {
+                e.stopPropagation();
+                alert("btn clicked");
+            }).on("click", function () {
+                alert("div clicked");
+            });
+        })
+    </script>
+
+同理可以阻止其他事件冒泡。
+
+
 ## 需求
- - [Bootstrap](https://github.com/twitter/bootstrap)
- - [qForm](https://github.com/Zsnd/qForm/)(可选) - form悬浮气泡验证插件。
+ - [Bootstrap3](http://getbootstrap.com/)
+ - [qForm](https://github.com/Zsnd/qForm/) - form悬浮气泡验证支持。
 
 ##data-api
 
